@@ -15,7 +15,7 @@ export const get = key => {
 };
 
 export const getMultiple = keys => {
-  keys.reduce((acc, o) => {
+  return keys.reduce((acc, o) => {
     acc[o] = store[o];
     return acc;
   }, {});
