@@ -1,3 +1,6 @@
+const EVENT_ADD = "ADD";
+const EVENT_REMOVE = "REMOVE";
+
 let store = {};
 
 // TODO: override error or not
@@ -8,7 +11,7 @@ let listeners = {};
 const set = (key, value) => {
   store[key] = value;
   Object.values(listeners).forEach(listener => {
-    listener({ key, value });
+    listener({ event: EVENT_ADD, data: { key, value } });
   });
 };
 
@@ -29,7 +32,7 @@ const getMultiple = keys => {
   }, {});
 };
 
-const reset = () => {
+const clear = () => {
   store = {};
 };
 
@@ -53,14 +56,35 @@ export const contains = key => {
   return store.hasOwnProperty(key);
 };
 
+const remove = key => {
+  const data = store[key];
+  delete store[key];
+  Object.values(listeners).forEach(listener => {
+    listener({ event: EVENT_REMOVE, data });
+  });
+};
+
+const removeMultiple = keys => {
+  keys.forEach(o => {
+    remove(o);
+  });
+};
+
+const getAllKeys = () => {
+  return Object.keys(store);
+};
+
 module.exports.GlobalStore = {
   set,
   setMultiple,
   get,
   getMultiple,
-  reset,
+  clear,
   contains,
   addListener,
   removeListener,
-  removeAllListeners
+  removeAllListeners,
+  remove,
+  removeMultiple,
+  getAllKeys
 };
