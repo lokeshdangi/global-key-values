@@ -1,35 +1,60 @@
 let store = {};
 
-export const set = (key, value) => {
-  store[key] = value;
-};
+let listeners = {};
 
-export const setMultiple = keyValuePair => {
-  keyValuePair.map(o => {
-    store[o.key] = o.value;
+const set = (key, value) => {
+  store[key] = value;
+  Object.values(listeners).forEach(listener => {
+    listener({ key, value });
   });
 };
 
-export const get = key => {
+const setMultiple = keyValuePair => {
+  keyValuePair.map(o => {
+    set(o.key, o.value);
+  });
+};
+
+const get = key => {
   return store[key];
 };
 
-export const getMultiple = keys => {
+const getMultiple = keys => {
   return keys.reduce((acc, o) => {
-    acc[o] = store[o];
+    acc[o] = get(o);
     return acc;
   }, {});
 };
 
-export const reset = () => {
+const reset = () => {
   store = {};
 };
 
-export const GlobalStore = {
-  set,
-  get,
-  getMultiple,
-  reset
+const addListener = (name, listener) => {
+  if (listeners.hasOwnProperty(name)) {
+    throw new Error("Listener by this name already exists");
+  }
+  listeners[name] = listener;
+  return id;
 };
 
-export default store;
+const removeListener = name => {
+  delete listeners[name];
+};
+
+const removeAllListeners = () => {
+  listeners = {};
+};
+
+exports.GlobalStore = {
+  set,
+  setMultiple,
+  get,
+  getMultiple,
+  reset,
+  addListener,
+  removeListener,
+  removeAllListeners
+};
+
+module.exports = store;
