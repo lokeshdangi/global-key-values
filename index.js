@@ -1,5 +1,8 @@
 let store = {};
 
+// TODO: override error or not
+// TODO: persist values
+
 let listeners = {};
 
 const set = (key, value) => {
@@ -46,12 +49,17 @@ const removeAllListeners = () => {
   listeners = {};
 };
 
+export const contains = key => {
+  return store.hasOwnProperty(key);
+};
+
 module.exports.GlobalStore = {
   set,
   setMultiple,
   get,
   getMultiple,
   reset,
+  contains,
   addListener,
   removeListener,
   removeAllListeners
