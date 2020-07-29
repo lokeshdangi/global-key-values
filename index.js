@@ -35,7 +35,7 @@ const addListener = (name, listener) => {
     throw new Error("Listener by this name already exists");
   }
   listeners[name] = listener;
-  return id;
+  return name;
 };
 
 const removeListener = name => {
