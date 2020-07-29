@@ -1,6 +1,6 @@
 {
   "name": "global-key-values",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "store and retrieve global key value pair",
   "main": "index.js",
   "repository": "https://github.com/lokeshdangi/global-key-values",
