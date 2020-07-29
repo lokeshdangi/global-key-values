@@ -46,7 +46,7 @@ const removeAllListeners = () => {
   listeners = {};
 };
 
-exports.GlobalStore = {
+module.exports.GlobalStore = {
   set,
   setMultiple,
   get,
@@ -56,5 +56,3 @@ exports.GlobalStore = {
   removeListener,
   removeAllListeners
 };
-
-module.exports = store;
