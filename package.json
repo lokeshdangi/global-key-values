@@ -5,5 +5,11 @@
   "main": "index.js",
   "repository": "https://github.com/lokeshdangi/global-key-values",
   "author": "Lokesh Dangi",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "global",
+    "key",
+    "value",
+    "key-value"
+  ]
 }
