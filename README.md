@@ -63,7 +63,7 @@ GlobalStore.removeListener(<listener name>)
 ## Remove all listeners
 
 ```
-GlobalStore.clear()
+GlobalStore.removeAllListeners()
 ```
 
 ## Get all keys
